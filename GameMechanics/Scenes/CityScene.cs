@@ -1,11 +1,15 @@
 ﻿using DinaCSharp.Core.Utils;
 using DinaCSharp.Events;
 using DinaCSharp.Graphics;
+using DinaCSharp.Inputs;
 using DinaCSharp.Resources;
 using DinaCSharp.Services;
 using DinaCSharp.Services.Scenes;
 
+using Dungeon100Steps.Core;
 using Dungeon100Steps.Core.Datas.Characters;
+using Dungeon100Steps.Core.Datas.Dungeons;
+using Dungeon100Steps.Core.Datas.Items;
 using Dungeon100Steps.Core.Keys;
 
 using Microsoft.Xna.Framework;
@@ -32,8 +36,6 @@ namespace Dungeon100Steps.GameMechanics.Scenes
         private Panel _background;
         private Panel _backgroundNoSelection;
 
-
-
         private Panel _blacksmithPanel;
         private Polygon _blacksmithPolygon;
         private Panel _dungeonPanel;
@@ -44,9 +46,9 @@ namespace Dungeon100Steps.GameMechanics.Scenes
         private Polygon _tavernPolygon;
         public override void Load()
         {
-            _player = ServiceLocator.Get<Player>(ProjectServiceKeys.Player);
-            if (_player == null)
-                throw new InvalidOperationException("Player service not found in ServiceLocator.");
+            _player = ServiceLocator.Get<Player>(ProjectServiceKeys.Player)
+                ?? throw new InvalidOperationException("Player service not found in ServiceLocator.");
+
             var playerPanelDimensions = new Vector2(_player.Texture.Width, _player.Texture.Height);
             var posPlayerPanel = new Vector2((ScreenDimensions.X - UIScaler.Scale(_player.Texture.Width)) / 2,
                                              ScreenDimensions.Y - UIScaler.Scale(_player.Texture.Height));
@@ -63,6 +65,16 @@ namespace Dungeon100Steps.GameMechanics.Scenes
             GenerateDungeonControls();
             GenerateHerboristControls();
             GenerateTavernControls();
+
+#if DEBUG
+            _player.EquipBag(BagFactory.Bag8Slots);
+            _player.Inventory.Add(ArmorFactory.Get(Rarity.Junk));
+            _player.Inventory.Add(ArmorFactory.Get(Rarity.Junk));
+            _player.Inventory.Add(ArmorFactory.Get(Rarity.Junk));
+            _player.Inventory.Add(WeaponFactory.Get(Rarity.Junk));
+            _player.Inventory.Add(WeaponFactory.Get(Rarity.Junk));
+            _player.Inventory.Add(WeaponFactory.Get(Rarity.Junk));
+#endif
         }
         public override void Reset()
         {
@@ -77,6 +89,12 @@ namespace Dungeon100Steps.GameMechanics.Scenes
         }
         public override void Update(GameTime gametime)
         {
+            if (InputManager.IsReleasedByAny(PlayerInputKeys.Cancel))
+            {
+                SceneManager.AddResource("PreviousScene", ProjectSceneKeys.CityScene);
+                SetCurrentScene(ProjectSceneKeys.PauseScene);
+            }
+
             _blacksmithPolygon?.Update(gametime);
             _dungeonPolygon?.Update(gametime);
             _herboristPolygon?.Update(gametime);
@@ -191,9 +209,15 @@ namespace Dungeon100Steps.GameMechanics.Scenes
         }
         private void OnDungeonClicked(object sender, PolygonEventArgs e)
         {
-            SetCurrentScene(ProjectSceneKeys.DungeonScene);
+#if DEBUG
+            var dungeon = DungeonFactory.GenerateDebugDungeon();
+#else
+            var dungeon = DungeonFactory.Generate(10);
+#endif
+            ServiceLocator.Register(ProjectServiceKeys.CurrentDungeon, dungeon);
+            SetCurrentScene(ProjectSceneKeys.WaitingScene);
         }
-        #endregion
+#endregion
 
         #region Herborist
         private void GenerateHerboristControls()
@@ -297,7 +321,10 @@ namespace Dungeon100Steps.GameMechanics.Scenes
                 _herboristPanel.Visible = false;
                 _tavernPanel.Visible = false;
             };
-            _inventoryPanel.OnClicked += (s, e) => { SetCurrentScene(ProjectSceneKeys.InventoryScene); };
+            _inventoryPanel.OnClicked += (s, e) => {
+                SceneManager.AddResource("PreviousScene", ProjectSceneKeys.CityScene);
+                SetCurrentScene(ProjectSceneKeys.InventoryScene);
+            };
         }
     }
 }

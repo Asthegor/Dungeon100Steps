@@ -40,7 +40,8 @@ namespace Dungeon100Steps.Core.Datas.Items
         public static Potion Get()
         {
             if (!_initialized)
-                throw new InvalidOperationException("PotionFactory not initialized.");
+                //throw new InvalidOperationException("PotionFactory not initialized.");
+                Initialize();
 
             int totalWeigth = _allPotions.Sum(w => w.Weight);
 
@@ -50,9 +51,9 @@ namespace Dungeon100Steps.Core.Datas.Items
             {
                 cursor += potion.Weight;
                 if (roll < cursor)
-                    return potion.Potion;
+                    return Clone(potion.Potion);
             }
-            return _allPotions.First().Potion;
+            return Clone(_allPotions.First().Potion);
         }
 
 
@@ -101,6 +102,11 @@ namespace Dungeon100Steps.Core.Datas.Items
         public static void ClearEventSubscribers()
         {
             OnPotionLoaded = null;
+        }
+        private static Potion Clone(Potion original)
+        {
+            var bonusesCopy = original.Bonuses.Select(b => new Bonus(b.Type, b.TranslationKey, b.Amount, b.Percentage, b.Duration)).ToList();
+            return new Potion(original.Name, original.Texture!, bonusesCopy, original.StackLimit);
         }
     }
     // Classe EventArgs pour l'événement de progression

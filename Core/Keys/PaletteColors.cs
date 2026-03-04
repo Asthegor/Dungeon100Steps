@@ -11,12 +11,17 @@ namespace Dungeon100Steps.Core.Keys
 
         public static readonly Color Transparent = Color.Transparent;
 
-        #region Menu principal
         public static readonly Color MainMenu_Title = Color.MonoGameOrange;
-        public static readonly Color MainMenu_TitleShadow = Color.DarkGray;
-        public static readonly Color MainMenu_DisabledMenuItem = Color.DarkSlateGray;
-        public static readonly Color MainMenu_MenuItem = Color.White;
-        public static readonly Color MainMenu_HoveredMenuItem = Color.Yellow;
+        public static readonly Color MainMenu_Title_Shadow = Color.DarkGray;
+        public static readonly Color MenuItem_Disabled = Color.DarkSlateGray;
+        public static readonly Color MenuItem = Color.White;
+        public static readonly Color MenuItem_Hovered = Color.Yellow;
+
+        public static readonly Color Message = Color.Wheat;
+        public static readonly Color Message_Panel_Background = Color.Blue;
+        public static readonly Color Message_Panel_Border = Color.White;
+        public static readonly Color Message_Continue = Color.Wheat;
+
 
         // Écran de chargement
         public static readonly Color Loading_Title = Color.MonoGameOrange;
@@ -24,11 +29,10 @@ namespace Dungeon100Steps.Core.Keys
         public static readonly Color Loading_Progress_Front = Color.DarkOrange;
         public static readonly Color Loading_Progress_Border = Color.Orange;
         public static readonly Color Loading_Progress_Back = Color.OrangeRed;
-        #endregion
 
         #region Écran des options
         public static readonly Color Options_Title = Color.MonoGameOrange;
-        public static readonly Color Options_TitleShadow = Color.DarkGray;
+        public static readonly Color Options_Title_Shadow = Color.DarkGray;
         public static readonly Color Options_Category = Color.LightGray;
         public static readonly Color Options_Label = Color.White;
         public static readonly Color Options_Button_Text = Color.White;
@@ -58,23 +62,23 @@ namespace Dungeon100Steps.Core.Keys
         #region Écran de sélection du personnage
         public static readonly Color SelectionPlayer_Label = Color.White;
         public static readonly Color SelectionPlayer_Background_Selected = Color.Goldenrod;
-        public static readonly Color SelectionPlayer_Border_Selected = Color.Gold;
         public static readonly Color SelectionPlayer_Background_Hover = Color.DarkSlateGray;
+        public static readonly Color SelectionPlayer_Border_Selected = Color.Gold;
         public static readonly Color SelectionPlayer_Border_Hover = Color.White;
 
         public static readonly Color SelectionPlayer_Genre_Border = Color.White;
         public static readonly Color SelectionPlayer_Genre_Background = Color.White * 0.25f;
-        public static readonly Color SelectionPlayer_Genre_Border_Selected = Color.Gold;
         public static readonly Color SelectionPlayer_Genre_Background_Selected = Color.Goldenrod;
-        public static readonly Color SelectionPlayer_Genre_Border_Hover = Color.DarkGray;
         public static readonly Color SelectionPlayer_Genre_Background_Hover = Color.DarkSlateGray;
+        public static readonly Color SelectionPlayer_Genre_Border_Selected = Color.Gold;
+        public static readonly Color SelectionPlayer_Genre_Border_Hover = Color.DarkGray;
 
         public static readonly Color SelectionPlayer_Hero_Border = Color.White;
         public static readonly Color SelectionPlayer_Hero_Background = Color.White;
-        public static readonly Color SelectionPlayer_Hero_Border_Hover = Color.Wheat;
         public static readonly Color SelectionPlayer_Hero_Background_Hover = Color.White;
-        public static readonly Color SelectionPlayer_Hero_Border_Selected = Color.Gold;
         public static readonly Color SelectionPlayer_Hero_Background_Selected = Color.White;
+        public static readonly Color SelectionPlayer_Hero_Border_Hover = Color.Wheat;
+        public static readonly Color SelectionPlayer_Hero_Border_Selected = Color.Gold;
 
         public static readonly Color SelectionPlayer_Buttons_Background = Color.White * 0.25f;
         public static readonly Color SelectionPlayer_Buttons_Border = Color.White;
@@ -111,8 +115,6 @@ namespace Dungeon100Steps.Core.Keys
         #endregion
 
         #region Écran du combat
-        public static readonly Color Combat_Menu_Label = Color.White;
-        public static readonly Color Combat_Menu_Label_Selected = Color.Lime;
         public static readonly Color Combat_Menu_Background = Color.Blue;
         public static readonly Color Combat_Menu_Border = Color.White;
         public static readonly Color Combat_HealthBar_Front = Color.Firebrick;
@@ -124,8 +126,6 @@ namespace Dungeon100Steps.Core.Keys
         #endregion
 
         #region Écran de l'inventaire
-        public static readonly Color Inventory_Button_Text = Color.Black;
-        public static readonly Color Inventory_Button_Text_Hovered = Color.Orange;
         public static readonly Color Inventory_Item_Selected_Background = Color.Transparent;
         public static readonly Color Inventory_Item_Selected_Border = Color.Gold;
         public static readonly Color Inventory_Item_Background = Color.Transparent;
@@ -134,6 +134,21 @@ namespace Dungeon100Steps.Core.Keys
         public static readonly Color Inventory_NoItem_Border = Color.White;
         public static readonly Color Inventory_ItemMenu_Text = Color.White;
         public static readonly Color Inventory_ItemMenu_Text_Selected = Color.Gold;
+        public static readonly Color Inventory_ItemMenu_Background = Color.Blue;
+        public static readonly Color Inventory_ItemMenu_Border = Color.White;
         #endregion
+
+        #region Écran de pause
+        public static readonly Color Pause_Title = Color.Gold;
+        public static readonly Color Pause_Title_Shadow = Color.Orange;
+        public static readonly Color Pause_Text = Color.White;
+        public static readonly Color Pause_Text_Selected = Color.Gold;
+        #endregion
+
+        #region Bouton Retour
+        public static readonly Color BackButton_Text = Color.Black;
+        public static readonly Color BackButton_Text_Hovered = Color.Orange;
+        #endregion
+
     }
 }

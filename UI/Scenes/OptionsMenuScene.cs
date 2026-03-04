@@ -83,7 +83,7 @@ namespace Dungeon100Steps.UI.Scenes
 
             Vector2 offsetTitle = new Vector2(2, 2);
             var titleFont = fontManager.Load(FontKeys.Options_Title);
-            var title = new ShadowText(titleFont, "OPTIONS_TITLE", PaletteColors.MainMenu_Title, new Vector2(0, ScreenDimensions.Y / 16), PaletteColors.MainMenu_TitleShadow, offsetTitle, HorizontalAlignment.Center);
+            var title = new ShadowText(titleFont, "OPTIONS_TITLE", PaletteColors.MainMenu_Title, new Vector2(0, ScreenDimensions.Y / 16), PaletteColors.MainMenu_Title_Shadow, offsetTitle, HorizontalAlignment.Center);
             title.Dimensions = new Vector2(ScreenDimensions.X, title.Dimensions.Y);
             _generalGroup.Add(title);
 
@@ -163,7 +163,7 @@ namespace Dungeon100Steps.UI.Scenes
         private Group CreateGraphicsGroup()
         {
             Group graphicsGroup = [];
-            graphicsGroup.AddTitle(_categoryFont, "OPTIONS_CATEGORY_GRAPHICS", PaletteColors.Options_Category, PaletteColors.Options_TitleShadow, UIScaler.Scale(CATEGORY_FRAME_PADDING), UIScaler.Scale(CATEGORY_FRAME_THICKNESS));
+            graphicsGroup.AddTitle(_categoryFont, "OPTIONS_CATEGORY_GRAPHICS", PaletteColors.Options_Category, PaletteColors.Options_Title_Shadow, UIScaler.Scale(CATEGORY_FRAME_PADDING), UIScaler.Scale(CATEGORY_FRAME_THICKNESS));
 
             float maxLabelWidth = 0;
             var fontHeight = _labelFont.LineSpacing;
@@ -237,7 +237,7 @@ namespace Dungeon100Steps.UI.Scenes
         {
             Group audioGroup = [];
             audioGroup.AddTitle(_categoryFont, "OPTIONS_CATEGORY_AUDIO",
-                                PaletteColors.Options_Title, PaletteColors.Options_TitleShadow,
+                                PaletteColors.Options_Title, PaletteColors.Options_Title_Shadow,
                                 UIScaler.Scale(CATEGORY_FRAME_PADDING), UIScaler.Scale(CATEGORY_FRAME_THICKNESS));
 
             float maxLabelWidth = 0;
@@ -352,13 +352,13 @@ namespace Dungeon100Steps.UI.Scenes
             _screenManager.SetResolution(_defaultDatas.ResolutionWidth, _defaultDatas.ResolutionHeight);
             _screenManager.SetFullScreen(_defaultDatas.Fullscreen);
 
-            _masterSlider.SetValue(_defaultDatas.MasterVolume);
+            _masterSlider.Value = _defaultDatas.MasterVolume;
             _soundManager.MasterVolume = _defaultDatas.MasterVolume;
 
-            _musicSlider.SetValue(_defaultDatas.MusicVolume);
+            _musicSlider.Value = _defaultDatas.MusicVolume;
             _soundManager.MusicVolume = _defaultDatas.MusicVolume;
 
-            _soundsSlider.SetValue(_defaultDatas.SoundsVolume);
+            _soundsSlider.Value = _defaultDatas.SoundsVolume;
             _soundManager.GlobalSoundVolume = _defaultDatas.SoundsVolume;
 
             _fullscreenCheckbox.IsChecked = _defaultDatas.Fullscreen;

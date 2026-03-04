@@ -33,4 +33,15 @@
         Defeat,
         Fled
     }
+    public enum TrapType
+    {
+        None,
+        Pit,
+        Darts,
+        PoisonGas,
+        PressurePlate,
+        Max
+    }
+    public enum EventState { ShowingMessage, Action, ProcessingAction, ShowingResult, ShowingDamage }
+
 }

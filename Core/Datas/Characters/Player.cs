@@ -1,13 +1,14 @@
 ﻿using Dungeon100Steps.Core.Datas.Items;
 
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 using System.Collections.Concurrent;
 
 namespace Dungeon100Steps.Core.Datas.Characters
 {
-    public class Player(string name, Texture2D texture, int attack, int defense, int health, int mana, Texture2D bagtexture)
-        : Character(name, texture, attack, defense, health, mana)
+    public class Player(string name, Texture2D texture, int attack, int defense, int health, int mana, Texture2D bagtexture, float combatdelay)
+        : Character(name, texture, attack, defense, health, mana, combatdelay)
     {
         private const int BASE_EXPERIENCE = 100;
         private const int LEVEL_PROGRESS_EXPERIENCE = 50;
@@ -18,6 +19,7 @@ namespace Dungeon100Steps.Core.Datas.Characters
         public event Action? OnLevelUp;
 
         private int _gold;
+        
 
         public HeroClass Class { get; set; }
         public int Level { get; set; }
@@ -26,6 +28,7 @@ namespace Dungeon100Steps.Core.Datas.Characters
 
         public int Dexterity { get; set; }
         public int Constitution { get; set; }
+
         public int Gold
         {
             get => _gold;
@@ -93,6 +96,5 @@ namespace Dungeon100Steps.Core.Datas.Characters
                 Inventory.Capacity = bag.MaxCapacity;
             }
         }
-
     }
 }

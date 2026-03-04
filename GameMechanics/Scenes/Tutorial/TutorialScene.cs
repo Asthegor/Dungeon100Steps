@@ -27,8 +27,6 @@ namespace Dungeon100Steps.GameMechanics.Scenes.Tutorial
         private readonly Vector2 NEXT_BUTTON_DIMENSIONS = new Vector2();
         private readonly Vector2 NEXT_BUTTON_OFFSET = new Vector2(20, 20);
 
-        private ResourceManager _resourceManager = ServiceLocator.Get<ResourceManager>(ProjectServiceKeys.AssetsResourceManager);
-
         private SceneManager _tutorialSceneManager;
         private bool _loadingFinished;
         private Dungeon _dungeon;
@@ -206,7 +204,8 @@ namespace Dungeon100Steps.GameMechanics.Scenes.Tutorial
         }
         private Button CreateNextButton()
         {
-            var backgroundImage = _resourceManager.Load<Texture2D>(GameResourceKeys.Button_Next);
+            var resourceManager = ServiceLocator.Get<ResourceManager>(ProjectServiceKeys.AssetsResourceManager);
+            var backgroundImage = resourceManager.Load<Texture2D>(GameResourceKeys.Button_Next);
             var pos = ScreenDimensions - UIScaler.Scale(NEXT_BUTTON_DIMENSIONS) - UIScaler.Scale(NEXT_BUTTON_OFFSET);
             return new Button(pos, backgroundImage, onClick: GoToNextState);
         }

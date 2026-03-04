@@ -35,9 +35,10 @@ namespace Dungeon100Steps.GameMechanics.Scenes
 
         private readonly Vector2 BUTTON_NEXT_DIMENSIONS = new Vector2(136, 80);
 
+        private readonly Vector2 ITEMMENU_BACKGROUND_OFFSET = new Vector2(10, 10);
+
         private readonly FontManager _fontManager = ServiceLocator.Get<FontManager>(ServiceKeys.FontManager);
         private readonly ResourceManager _resourceManager = ServiceLocator.Get<ResourceManager>(ProjectServiceKeys.AssetsResourceManager);
-        //private readonly PlayerController _playerController = ServiceLocator.Get<PlayerController>(ProjectServiceKeys.PlayerController);
 
         private Player _player;
         private Group _playerGroup;
@@ -53,7 +54,8 @@ namespace Dungeon100Steps.GameMechanics.Scenes
 
         private Button _backButton;
 
-        private MenuManager _itemMenuManager;
+        private MenuManager _weaponAndArmorMenu;
+        private MenuManager _potionMenu;
         private bool _isItemMenuDisplayed;
 
         private enum ItemType { Weapon, Armor, Potion }
@@ -61,8 +63,11 @@ namespace Dungeon100Steps.GameMechanics.Scenes
         private readonly Dictionary<Panel, Item> _itemPanels = [];
 
         private Item _selectedItem;
+
+        private Key<SceneTag>? _previousScene;
         public override void Load()
         {
+
             _player = ServiceLocator.Get<Player>(ProjectServiceKeys.Player);
             _player.OnWeaponChanged += OnWeaponChanged;
             _player.OnArmorChanged += OnArmorChanged;
@@ -75,27 +80,43 @@ namespace Dungeon100Steps.GameMechanics.Scenes
 
             _backButton = new Button(position: new Vector2(ScreenDimensions.X * 4 / 5, ScreenDimensions.Y * 7 / 8),
                                      dimensions: UIScaler.Scale(BUTTON_NEXT_DIMENSIONS),
-                                     font: _fontManager.Load(FontKeys.Inventory_Button_Text),
+                                     font: _fontManager.Load(FontKeys.BackButton_Text),
                                      content: "UI_BACK",
-                                     textColor: PaletteColors.Inventory_Button_Text,
+                                     textColor: PaletteColors.BackButton_Text,
                                      backgroundImage: _resourceManager.Load<Texture2D>(GameResourceKeys.Button_Next),
-                                     onClick: ReturnToCity, onHover: OnButtonNextHovered);
+                                     onClick: ReturnToPreviousScene, onHover: OnButtonNextHovered);
 
-            CreateItemMenu();
+            CreateWeaponAndArmorMenu();
+            CreatePotionMenu();
 
-            _player.Inventory.Add(WeaponFactory.Get(Rarity.Elite));
+
 
         }
 
         public override void Reset()
         {
+            _previousScene = SceneManager.GetResource<Key<SceneTag>>("PreviousScene");
+            if (!_previousScene.HasValue)
+                throw new ArgumentNullException("PreviousScene must not be null.");
+
+            SceneManager.RemoveResource("PreviousScene");
+
             CreateInventoryGroup();
         }
         public override void Update(GameTime gametime)
         {
             if (_isItemMenuDisplayed)
             {
-                _itemMenuManager.Update(gametime);
+                switch (_selectedItem)
+                {
+                    case Weapon:
+                    case Armor:
+                        _weaponAndArmorMenu?.Update(gametime);
+                        break;
+                    case Potion:
+                        _potionMenu?.Update(gametime);
+                        break;
+                }
                 return;
             }
 
@@ -111,7 +132,10 @@ namespace Dungeon100Steps.GameMechanics.Scenes
             _backButton?.Draw(spritebatch);
 
             if (_isItemMenuDisplayed)
-                _itemMenuManager?.Draw(spritebatch);
+            {
+                _weaponAndArmorMenu?.Draw(spritebatch);
+                _potionMenu?.Draw(spritebatch);
+            }
         }
 
 
@@ -126,7 +150,7 @@ namespace Dungeon100Steps.GameMechanics.Scenes
         private void OnStatsChanged()
         {
             _healthText.Content = $"{_player.Health} / {_player.MaxHealth}";
-            _attackText.Content = $"{_player.Attack}";
+            _attackText.Content = $"{_player.AttackAmount}";
             _defenseText.Content = $"{_player.Defense}";
             _manaText.Content = $"{_player.Mana} / {_player.MaxMana}";
             _goldText.Content = $"{_player.Gold}";
@@ -161,9 +185,9 @@ namespace Dungeon100Steps.GameMechanics.Scenes
             manaGroup.Position = pos;
             group.Add(manaGroup);
 
-            // Attack
+            // AttackAmount
             pos += new Vector2(0, manaGroup.Dimensions.Y + UIScaler.Scale(PLAYER_LABEL_OFFSET_Y));
-            var attackGroup = CreatePlayerStatGroup("PLAYER_ATTACK_LABEL", _player.Attack.ToString(), UIScaler.Scale(PLAYER_LABEL_OFFSET_X), out _attackText);
+            var attackGroup = CreatePlayerStatGroup("PLAYER_ATTACK_LABEL", _player.AttackAmount.ToString(), UIScaler.Scale(PLAYER_LABEL_OFFSET_X), out _attackText);
             attackGroup.Position = pos;
             group.Add(attackGroup);
 
@@ -250,7 +274,7 @@ namespace Dungeon100Steps.GameMechanics.Scenes
             foreach (var bonus in equipment.Bonuses)
             {
                 pos += new Vector2(0, bonusFont.LineSpacing);
-                var bonusText = new Text(bonusFont, bonus.GetDescription(_player.Attack), PaletteColors.Equipment_Bonus_Text, pos);
+                var bonusText = new Text(bonusFont, bonus.GetDescription(_player.AttackAmount), PaletteColors.Equipment_Bonus_Text, pos);
                 group.Add(bonusText);
             }
             return group;
@@ -270,13 +294,13 @@ namespace Dungeon100Steps.GameMechanics.Scenes
 
             return group;
         }
-        private void ReturnToCity(Button button)
+        private void ReturnToPreviousScene(Button button)
         {
-            SetCurrentScene(ProjectSceneKeys.CityScene);
+            SetCurrentScene((Key<SceneTag>)_previousScene);
         }
         private void OnButtonNextHovered(Button button)
         {
-            button.TextColor = PaletteColors.Inventory_Button_Text_Hovered;
+            button.TextColor = PaletteColors.BackButton_Text_Hovered;
         }
 
         private void CreateInventoryGroup()
@@ -304,6 +328,7 @@ namespace Dungeon100Steps.GameMechanics.Scenes
                 var itemPanel = new Panel(position: default, dimensions: UIScaler.Scale(EQUIPMENT_DIMENSIONS),
                                           image: slot.Item.Texture);
                 itemPanel.OnRightClicked += DisplayItemMenu;
+                itemPanel.OnClicked += DisplayItemInfos;
                 _itemPanels[itemPanel] = slot.Item;
 
                 group.Add(itemPanel);
@@ -327,86 +352,134 @@ namespace Dungeon100Steps.GameMechanics.Scenes
             return group;
         }
 
+        private void DisplayItemInfos(object sender, PanelEventArgs e)
+        {
+            var panel = e.Panel;
+            _selectedItem = _itemPanels[panel];
+
+
+        }
+
         private void DisplayItemMenu(object sender, PanelEventArgs e)
         {
-            _selectedItem = _itemPanels[e.Panel];
+            var panel = e.Panel;
+            _selectedItem = _itemPanels[panel];
 
-            foreach (var menuItem in _itemMenus.Values)
-                menuItem.Visible = false;
+            _weaponAndArmorMenu.Visible = false;
+            _potionMenu.Visible = false;
 
             switch (_selectedItem)
             {
                 case Weapon:
-                    _itemMenus[ItemType.Weapon].Visible = true;
-                    break;
                 case Armor:
-                    _itemMenus[ItemType.Armor].Visible = true;
+                    _weaponAndArmorMenu.Visible = true;
+                    _weaponAndArmorMenu.Reset();
+                    _weaponAndArmorMenu.ItemsPosition = panel.Position + new Vector2(panel.Dimensions.X, 0);
                     break;
                 case Potion:
-                    _itemMenus[ItemType.Potion].Visible = true;
+                    _potionMenu.Visible = true;
+                    _potionMenu.Reset();
+                    _potionMenu.ItemsPosition = panel.Position + new Vector2(panel.Dimensions.X, 0);
                     break;
             }
-            _itemMenuManager.Reset(0);
-            _itemMenuManager.Visible = true;
             _isItemMenuDisplayed = true;
         }
 
         private void CancelItemMenu()
         {
             _isItemMenuDisplayed = false;
-            _itemMenuManager.Visible = false;
+            _weaponAndArmorMenu.Visible = false;
+            _potionMenu.Visible = false;
+            _selectedItem = null;
         }
-        private void CreateItemMenu()
+        private void CreateWeaponAndArmorMenu()
         {
-            _itemMenuManager = new MenuManager(cancellation: CancelItemMenu);
+            _weaponAndArmorMenu = new MenuManager(cancellation: CancelItemMenu);
 
             var font = _fontManager.Load(FontKeys.Inventory_Item_Menu);
-            var weaponMenuItem = _itemMenuManager.AddItem(font, "INVENTORY_EQUIP", PaletteColors.Inventory_ItemMenu_Text,
-                                                          selection: ItemMenuSelection, deselection: ItemMenuDeselection,
-                                                          activation: UseItem);
+            var weaponMenuItem = _weaponAndArmorMenu.AddItem(font, "INVENTORY_EQUIP", PaletteColors.MenuItem,
+                                                             selection: OnMenuItemSelection, deselection: OnMenuItemDeselection,
+                                                             activation: EquipItem);
             _itemMenus[ItemType.Weapon] = weaponMenuItem;
             _itemMenus[ItemType.Armor] = weaponMenuItem;
-            weaponMenuItem.Visible = false;
 
-            var potionMenuItem = _itemMenuManager.AddItem(font, "INVENTORY_DRINK", PaletteColors.Inventory_ItemMenu_Text,
-                                                          selection: ItemMenuSelection, deselection: ItemMenuDeselection,
-                                                          activation: UseItem);
+            _weaponAndArmorMenu.AddItem(font, "INVENTORY_DROP", PaletteColors.MenuItem,
+                                        selection: OnMenuItemSelection, deselection: OnMenuItemDeselection,
+                                        activation: DropItem);
+
+            var panel = new Panel(position: UIScaler.Scale(ITEMMENU_BACKGROUND_OFFSET) * -1,
+                                  dimensions: _weaponAndArmorMenu.ItemsDimensions + UIScaler.Scale(ITEMMENU_BACKGROUND_OFFSET) * 2,
+                                  backgroundcolor: PaletteColors.Inventory_ItemMenu_Background,
+                                  bordercolor: PaletteColors.Inventory_ItemMenu_Border, thickness: 5,
+                                  withroundcorner: true, radius: 15);
+            _weaponAndArmorMenu.SetItemsBackground(panel, UIScaler.Scale(ITEMMENU_BACKGROUND_OFFSET));
+        }
+        private void CreatePotionMenu()
+        {
+            _potionMenu = new MenuManager(cancellation: CancelItemMenu);
+            var font = _fontManager.Load(FontKeys.Inventory_Item_Menu);
+
+            var potionMenuItem = _potionMenu.AddItem(font, "INVENTORY_DRINK", PaletteColors.MenuItem,
+                                                     selection: OnMenuItemSelection, deselection: OnMenuItemDeselection,
+                                                     activation: DrinkPotion);
             _itemMenus[ItemType.Potion] = potionMenuItem;
 
+            _potionMenu.AddItem(font, "INVENTORY_DROP", PaletteColors.MenuItem,
+                                selection: OnMenuItemSelection, deselection: OnMenuItemDeselection,
+                                activation: DropItem);
+
+            var panel = new Panel(position: UIScaler.Scale(ITEMMENU_BACKGROUND_OFFSET) * -1,
+                                  dimensions: _weaponAndArmorMenu.ItemsDimensions + UIScaler.Scale(ITEMMENU_BACKGROUND_OFFSET) * 2,
+                                  backgroundcolor: PaletteColors.Inventory_ItemMenu_Background,
+                                  bordercolor: PaletteColors.Inventory_ItemMenu_Border, thickness: 5,
+                                  withroundcorner: true, radius: 15);
+            _potionMenu.SetItemsBackground(panel, UIScaler.Scale(ITEMMENU_BACKGROUND_OFFSET));
         }
 
-        private MenuItem UseItem(MenuItem menuItem)
+        private MenuItem EquipItem(MenuItem menuItem)
         {
             switch (_selectedItem)
             {
                 case Weapon weapon:
                     _player.EquipWeapon(weapon);
-                    _selectedItem = null;
                     break;
                 case Armor armor:
                     _player.EquipArmor(armor);
-                    _selectedItem = null;
-                    break;
-                case Potion potion:
-                    _player.DrinkPotion(potion);
-                    _selectedItem = null;
                     break;
             }
+            UpdateInventory();
+            return menuItem;
+        }
+        private MenuItem DrinkPotion(MenuItem menuItem)
+        {
+            Potion potion = _selectedItem as Potion;
+            _player.DrinkPotion(potion);
+            UpdateInventory();
+            return menuItem;
+        }
+        private MenuItem DropItem(MenuItem menuItem)
+        {
+            Item item = _selectedItem;
+            _player.Inventory.Remove(item);
+            UpdateInventory();
+            return menuItem;
+        }
+        private void UpdateInventory()
+        {
+            _selectedItem = null;
 
             CreateInventoryGroup();
             CancelItemMenu();
+        }
+        private MenuItem OnMenuItemDeselection(MenuItem menuItem)
+        {
+            menuItem.Color = PaletteColors.MenuItem;
             return menuItem;
         }
 
-        private MenuItem ItemMenuDeselection(MenuItem menuItem)
+        private MenuItem OnMenuItemSelection(MenuItem menuItem)
         {
-            menuItem.Color = PaletteColors.Inventory_ItemMenu_Text;
-            return menuItem;
-        }
-
-        private MenuItem ItemMenuSelection(MenuItem menuItem)
-        {
-            menuItem.Color = PaletteColors.Inventory_ItemMenu_Text_Selected;
+            menuItem.Color = PaletteColors.MenuItem_Hovered;
             return menuItem;
         }
     }

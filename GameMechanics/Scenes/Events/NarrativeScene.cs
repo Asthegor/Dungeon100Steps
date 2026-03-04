@@ -1,8 +1,10 @@
-﻿using DinaCSharp.Services;
+﻿using DinaCSharp.Inputs;
+using DinaCSharp.Services;
 using DinaCSharp.Services.Scenes;
 
 using Dungeon100Steps.Core;
 using Dungeon100Steps.Core.Datas.Characters;
+using Dungeon100Steps.Core.Datas.Dungeons;
 using Dungeon100Steps.Core.Datas.Events;
 using Dungeon100Steps.Core.Keys;
 
@@ -10,6 +12,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 using System;
+using System.Diagnostics;
 
 namespace Dungeon100Steps.GameMechanics.Scenes.Events
 {
@@ -19,6 +22,7 @@ namespace Dungeon100Steps.GameMechanics.Scenes.Events
     {
 
         private Player _player;
+        private Dungeon _currentDungeon;
         private NarrativeEvent _currentEvent;
         public override void Load()
         {
@@ -26,10 +30,13 @@ namespace Dungeon100Steps.GameMechanics.Scenes.Events
         }
         public override void Reset()
         {
-            _currentEvent = ServiceLocator.Get<NarrativeEvent>(ProjectServiceKeys.CurrentEvent);
-            if (_currentEvent == null)
-                throw new InvalidOperationException($"CurrentEvent n'est pas de type '{_currentEvent.GetType().Name}' dans le ServiceLocator.");
-
+            _currentDungeon = ServiceLocator.Get<Dungeon>(ProjectServiceKeys.CurrentDungeon)
+                ?? throw new InvalidOperationException("Aucun donjon trouvé.");
+            _currentEvent = ServiceLocator.Get<NarrativeEvent>(ProjectServiceKeys.CurrentEvent)
+                ?? throw new InvalidOperationException($"CurrentEvent n'est pas de type '{_currentEvent.GetType().Name}' dans le ServiceLocator.");
+#if DEBUG
+            Trace.WriteLine(GetType().Name);
+#endif
         }
         public override void Update(GameTime gametime)
         {
@@ -38,6 +45,11 @@ namespace Dungeon100Steps.GameMechanics.Scenes.Events
                 GoToWaitingScene(EventResult.Defeat);
                 return;
             }
+#if DEBUG
+            if(InputManager.IsPressedByAny(PlayerInputKeys.Activate))
+                GoToWaitingScene(EventResult.Victory);
+#endif
+
         }
         public override void Draw(SpriteBatch spritebatch)
         {

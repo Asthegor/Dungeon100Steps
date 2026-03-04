@@ -10,7 +10,7 @@ namespace Dungeon100Steps.Core.Datas.Items
 {
     public static class WeaponFactory
     {
-        private static Random _random = new();
+        private static readonly Random _random = new();
         private static ResourceManager? _resourceManager;
         private static readonly Dictionary<Rarity, List<(int Weight, Weapon Weapon)>> _allWeapons = [];
         private static bool _initialized;
@@ -44,7 +44,8 @@ namespace Dungeon100Steps.Core.Datas.Items
         public static Weapon Get(Rarity rarity)
         {
             if (!_initialized)
-                throw new InvalidOperationException("WeaponFactory not initialized");
+                //throw new InvalidOperationException("WeaponFactory not initialized");
+                Initialize();
 
             List<(int Weight, Weapon Weapon)> weapons = _allWeapons[rarity];
 
@@ -56,9 +57,9 @@ namespace Dungeon100Steps.Core.Datas.Items
             {
                 cursor += weapon.Weight;
                 if (roll < cursor)
-                    return weapon.Weapon;
+                    return Clone(weapon.Weapon);
             }
-            return weapons.First().Weapon;
+            return Clone(weapons.First().Weapon);
         }
 
 
@@ -429,13 +430,22 @@ namespace Dungeon100Steps.Core.Datas.Items
             OnWeaponLoaded = null;
         }
 
-        internal static Item GenerateTutorialWeapon(ResourceManager resourceManager)
+        public static Item GenerateTutorialWeapon(ResourceManager resourceManager)
         {
+            _resourceManager = resourceManager;
             return CreateWeapon(Rarity.Junk, WeaponKeys.Junk_SharpenedBranch,
                                 nameof(WeaponKeys.Junk_SharpenedBranch).ToUpperInvariant(),
                                 [
                                     new Bonus(BonusType.Attack, "BONUS_ATTACK", 1)
                                 ]);
+        }
+        private static Weapon Clone(Weapon original)
+        {
+            var bonusesCopy = original.Bonuses.Select(b => new Bonus(b.Type, b.TranslationKey, b.Amount, b.Percentage, b.Duration)).ToList();
+            return new Weapon(original.Name, original.Texture!, bonusesCopy)
+            {
+                Rarity = original.Rarity
+            };
         }
     }
     // Classe EventArgs pour l'événement de progression

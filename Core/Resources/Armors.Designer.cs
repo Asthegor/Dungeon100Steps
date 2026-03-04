@@ -295,11 +295,11 @@ namespace Dungeon100Steps.Core.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Enchanted Robes.
+        ///   Recherche une chaîne localisée semblable à Enchanted Robe.
         /// </summary>
-        public static string RARE_ENCHANTEDROBES {
+        public static string RARE_ENCHANTEDROBE {
             get {
-                return ResourceManager.GetString("RARE_ENCHANTEDROBES", resourceCulture);
+                return ResourceManager.GetString("RARE_ENCHANTEDROBE", resourceCulture);
             }
         }
         

@@ -26,5 +26,8 @@ namespace Dungeon100Steps.Core.Keys
         public static readonly Key<ActionTag> PreviousMusic = Key<ActionTag>.FromString("PreviousMusic");
         /// <summary>Action de musique suivante.</summary>
         public static readonly Key<ActionTag> NextMusic = Key<ActionTag>.FromString("NextMusic");
+        /// <summary>Action de mise en pause.</summary>
+        public static readonly Key<ActionTag> Start = Key<ActionTag>.FromString("Start");
+        public static readonly Key<ActionTag> Select = Key<ActionTag>.FromString("Select");
     }
 }

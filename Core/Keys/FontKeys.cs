@@ -7,21 +7,20 @@ namespace Dungeon100Steps.Core.Keys
     {
         public readonly static Key<FontTag> Default = Key<FontTag>.FromString("Default");
 
-        #region Menu principal
+        // Menu principal
         public readonly static Key<FontTag> MainMenu_Title = Key<FontTag>.FromString("MainMenu_Title");
         public readonly static Key<FontTag> MainMenu_MenuItems = Key<FontTag>.FromString("MainMenu_MenuItems");
-        #endregion
+        
+        public readonly static Key<FontTag> Messages = Key<FontTag>.FromString("Messages");
 
-        #region Écran des options
+
+        // Écran des options
         public readonly static Key<FontTag> Options_Title = Key<FontTag>.FromString("Options_Title");
         public readonly static Key<FontTag> Options_Category = Key<FontTag>.FromString("Options_Category");
         public readonly static Key<FontTag> Options_Label = Key<FontTag>.FromString("Options_Label");
         public readonly static Key<FontTag> Options_Texts = Key<FontTag>.FromString("Options_Texts");
-        #endregion
+        
 
-
-        #region Écran du jeu
-        public static readonly Key<FontTag> Progression_Label = Key<FontTag>.FromString("Progression_Label");
         public static readonly Key<FontTag> SelectPlayer_Label = Key<FontTag>.FromString("SelectPlayer_Label");
 
         // Écran de chargement
@@ -32,25 +31,29 @@ namespace Dungeon100Steps.Core.Keys
         public static readonly Key<FontTag> Player_Label = Key<FontTag>.FromString("Player_Label");
         public static readonly Key<FontTag> Player_Value = Key<FontTag>.FromString("Player_Value");
 
+        // Écran pour passer le tutoriel
+        public static readonly Key<FontTag> TutorialSkip_Message = Key<FontTag>.FromString("TutorialSkip_Message");
+        public static readonly Key<FontTag> TutorialSkip_Button_Label = Key<FontTag>.FromString("TutorialSkip_Button_Label");
+
+        // Textes du jeu
+        public static readonly Key<FontTag> Game_Texts = Key<FontTag>.FromString("Game_Texts");
+
+        // Écran du combat
+        public static readonly Key<FontTag> PlayerMenu_Items = Key<FontTag>.FromString("PlayerMenu_Items");
+        
+        // Inventaire et écran d'attente entre 2 salles.
+        public static readonly Key<FontTag> Inventory_Item_Menu = Key<FontTag>.FromString("Inventory_Item_Menu");
+
         // Équipement
-        public static readonly Key<FontTag> Equipment_Bonus_Label = Key<FontTag>.FromString("Equipment_Bonus_Label");
         public static readonly Key<FontTag> Equipment_Bonus_Text = Key<FontTag>.FromString("Equipment_Bonus_Text");
         public static readonly Key<FontTag> Equipment_Name = Key<FontTag>.FromString("Equipment_Name");
 
-        #endregion
+        // Écran de pause
+        public static readonly Key<FontTag> Pause_Title = Key<FontTag>.FromString("Pause_Title");
+        public static readonly Key<FontTag> Pause_Texts = Key<FontTag>.FromString("Pause_Texts");
 
-        #region Écran pour passer le tutoriel
-        public static readonly Key<FontTag> TutorialSkip_Message = Key<FontTag>.FromString("TutorialSkip_Message");
-        public static readonly Key<FontTag> TutorialSkip_Button_Label = Key<FontTag>.FromString("TutorialSkip_Button_Label");
-        #endregion
-
-        #region Écran du combat
-        public static readonly Key<FontTag> PlayerMenu_Items = Key<FontTag>.FromString("PlayerMenu_Items");
-        #endregion
-
-        #region Écran de l'inventaire
-        public static readonly Key<FontTag> Inventory_Button_Text = Key<FontTag>.FromString("Inventory_Button_Text");
-        public static readonly Key<FontTag> Inventory_Item_Menu = Key<FontTag>.FromString("Inventory_Item_Menu");
-        #endregion
+        // Back button
+        public static readonly Key<FontTag> BackButton_Text = Key<FontTag>.FromString("BackButton_Text");
+        
     }
 }

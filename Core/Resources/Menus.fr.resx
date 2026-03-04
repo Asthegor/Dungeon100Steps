@@ -237,4 +237,28 @@
   <data name="TUTORIALSKIP_MESSAGE" xml:space="preserve">
     <value>Souhaitez-vous lancer le tutoriel ?</value>
   </data>
+  <data name="INVENTORY_EQUIP" xml:space="preserve">
+    <value>Équiper</value>
+  </data>
+  <data name="INVENTORY_DRINK" xml:space="preserve">
+    <value>Boire</value>
+  </data>
+  <data name="INVENTORY_DROP" xml:space="preserve">
+    <value>Jeter</value>
+  </data>
+  <data name="LOADING_BAGS" xml:space="preserve">
+    <value>En train de vider les sacs...</value>
+  </data>
+  <data name="PAUSE_TITLE" xml:space="preserve">
+    <value>Pause</value>
+  </data>
+  <data name="GAME_NEXT_EVENT" xml:space="preserve">
+    <value>Salle suivante</value>
+  </data>
+  <data name="GAME_FIRST_EVENT" xml:space="preserve">
+    <value>Entrer</value>
+  </data>
+  <data name="PRESS_TO_CONTINUE" xml:space="preserve">
+    <value>Appuyer sur une touche pour continuer</value>
+  </data>
 </root>

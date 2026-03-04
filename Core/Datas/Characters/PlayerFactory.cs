@@ -26,9 +26,10 @@ namespace Dungeon100Steps.Core.Datas.Characters
         {
             return new Player(name: "WARRIOR_" + genre.ToString().ToUpperInvariant(),
                               texture: texture,
-                              attack: 15, defense: 10,
-                              health: 120, mana: 30,
-                              bagtexture: bagtexture)
+                              attack: 5, defense: 5,
+                              health: 120, mana: 10,
+                              bagtexture: bagtexture,
+                              combatdelay: 1.5f)
             {
                 Class = HeroClass.Warrior,
                 Dexterity = 5,
@@ -39,9 +40,10 @@ namespace Dungeon100Steps.Core.Datas.Characters
         {
             return new Player(name: "MAGE_" + genre.ToString().ToUpperInvariant(),
                               texture: texture,
-                              attack: 8, defense: 4,
-                              health: 80, mana: 60,
-                              bagtexture: bagtexture)
+                              attack: 2, defense: 2,
+                              health: 80, mana: 80,
+                              bagtexture: bagtexture,
+                              combatdelay: 1.2f)
             {
                 Class = HeroClass.Mage,
                 Dexterity = 6,
@@ -52,9 +54,10 @@ namespace Dungeon100Steps.Core.Datas.Characters
         {
             return new Player(name: "THIEF_" + genre.ToString().ToUpperInvariant(),
                               texture: texture,
-                              attack: 12, defense: 6,
-                              health: 100, mana: 40,
-                              bagtexture: bagtexture)
+                              attack: 4, defense: 3,
+                              health: 100, mana: 30,
+                              bagtexture: bagtexture,
+                              combatdelay: 0.8f)
             {
                 Class = HeroClass.Thief,
                 Dexterity = 12,

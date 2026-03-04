@@ -78,7 +78,7 @@ namespace Dungeon100Steps.UI.Scenes
             #region Ajout du titre
             var mainTitle = _menuManager.AddTitle(titleFont, "GAME_TITLE",
                                                   MENU_TITLE_POSITION, PaletteColors.MainMenu_Title,
-                                                  PaletteColors.MainMenu_TitleShadow, MENU_OFFSET_TITLE_SHADOW);
+                                                  PaletteColors.MainMenu_Title_Shadow, MENU_OFFSET_TITLE_SHADOW);
 
             _menuManager.CenterTitles(ScreenDimensions);
             #endregion
@@ -107,11 +107,11 @@ namespace Dungeon100Steps.UI.Scenes
         #region Fonctions utilitaires
         private void AddMenuItem(SpriteFont menuItemFont, string key, Func<MenuItem, MenuItem> onClick, bool disabled = false)
         {
-            var item = _menuManager.AddItem(menuItemFont, key, PaletteColors.MainMenu_MenuItem, Selection, Deselection, onClick, HorizontalAlignment.Center);
+            var item = _menuManager.AddItem(menuItemFont, key, PaletteColors.MenuItem, Selection, Deselection, onClick, HorizontalAlignment.Center);
             if (disabled)
             {
                 item.State = MenuItemState.Disable;
-                item.DisableColor = PaletteColors.MainMenu_DisabledMenuItem;
+                item.DisableColor = PaletteColors.MenuItem_Disabled;
             }
         }
         #endregion
@@ -120,12 +120,12 @@ namespace Dungeon100Steps.UI.Scenes
         #region Fonctions génériques du menu
         private MenuItem Selection(MenuItem item)
         {
-            item.Color = PaletteColors.MainMenu_HoveredMenuItem;
+            item.Color = PaletteColors.MenuItem_Hovered;
             return item;
         }
         private MenuItem Deselection(MenuItem item)
         {
-            item.Color = PaletteColors.MainMenu_MenuItem;
+            item.Color = PaletteColors.MenuItem;
             return item;
         }
         private MenuItem LaunchGame(MenuItem item)

@@ -6,17 +6,17 @@ namespace Dungeon100Steps.Core.Datas.Items
     {
         private static readonly Random _random = new Random();
 
-        public static Item? CreateEquipment(int floorLevel, Rarity? specifiedRarity = null)
+        public static Item? CreateEquipment(int level, ItemType? itemType = null, Rarity? rarity = null)
         {
-            ItemType itemType = RollItemType();
+            itemType ??= RollItemType();
 
             if (itemType == ItemType.Weapon || itemType == ItemType.Armor)
             {
-                Rarity rarity = RollRarity(floorLevel == 100);
+                rarity ??= RollRarity(level == 100);
                 if (itemType == ItemType.Weapon)
-                    return GetWeapon(specifiedRarity ?? rarity);
+                    return GetWeapon(rarity.Value);
                 else
-                    return GetArmor(specifiedRarity ?? rarity);
+                    return GetArmor(rarity.Value);
             }
             else if (itemType == ItemType.Potion)
             {

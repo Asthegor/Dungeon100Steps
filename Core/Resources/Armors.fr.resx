@@ -195,8 +195,8 @@
   <data name="RARE_MITHRILCHAINMAIL" xml:space="preserve">
     <value>Cotte de mailles en Mithril</value>
   </data>
-  <data name="RARE_ENCHANTEDROBES" xml:space="preserve">
-    <value>Robes enchantées</value>
+  <data name="RARE_ENCHANTEDROBE" xml:space="preserve">
+    <value>Robe enchantée</value>
   </data>
   <data name="RARE_DRAGONSCALESHIELD" xml:space="preserve">
     <value>Bouclier en écailles de dragon</value>

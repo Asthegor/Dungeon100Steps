@@ -13,6 +13,13 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin 1080p/BackButton_Text.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:1080p/BackButton_Text.spritefont
+
 #begin 1080p/Default.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -41,12 +48,12 @@
 /processorParam:TextureFormat=Compressed
 /build:1080p/Equipment_Name.spritefont
 
-#begin 1080p/Inventory_Button_Text.spritefont
+#begin 1080p/Game_Texts.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:1080p/Inventory_Button_Text.spritefont
+/build:1080p/Game_Texts.spritefont
 
 #begin 1080p/Inventory_Item_Menu.spritefont
 /importer:FontDescriptionImporter
@@ -83,6 +90,13 @@
 /processorParam:TextureFormat=Compressed
 /build:1080p/MainMenu_Title.spritefont
 
+#begin 1080p/Messages.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:1080p/Messages.spritefont
+
 #begin 1080p/Options_Category.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -110,6 +124,20 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:1080p/Options_Title.spritefont
+
+#begin 1080p/Pause_Texts.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:1080p/Pause_Texts.spritefont
+
+#begin 1080p/Pause_Title.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:1080p/Pause_Title.spritefont
 
 #begin 1080p/Player_Label.spritefont
 /importer:FontDescriptionImporter
@@ -160,6 +188,13 @@
 /processorParam:TextureFormat=Compressed
 /build:1080p/TutorialSkip_Message.spritefont
 
+#begin 1440p/BackButton_Text.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:1440p/BackButton_Text.spritefont
+
 #begin 1440p/Default.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -188,12 +223,12 @@
 /processorParam:TextureFormat=Compressed
 /build:1440p/Equipment_Name.spritefont
 
-#begin 1440p/Inventory_Button_Text.spritefont
+#begin 1440p/Game_Texts.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:1440p/Inventory_Button_Text.spritefont
+/build:1440p/Game_Texts.spritefont
 
 #begin 1440p/Inventory_Item_Menu.spritefont
 /importer:FontDescriptionImporter
@@ -230,6 +265,13 @@
 /processorParam:TextureFormat=Compressed
 /build:1440p/MainMenu_Title.spritefont
 
+#begin 1440p/Messages.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:1440p/Messages.spritefont
+
 #begin 1440p/Options_Category.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -257,6 +299,20 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:1440p/Options_Title.spritefont
+
+#begin 1440p/Pause_Texts.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:1440p/Pause_Texts.spritefont
+
+#begin 1440p/Pause_Title.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:1440p/Pause_Title.spritefont
 
 #begin 1440p/Player_Label.spritefont
 /importer:FontDescriptionImporter
@@ -307,6 +363,13 @@
 /processorParam:TextureFormat=Compressed
 /build:1440p/TutorialSkip_Message.spritefont
 
+#begin 2160p/BackButton_Text.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:2160p/BackButton_Text.spritefont
+
 #begin 2160p/Default.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -335,12 +398,12 @@
 /processorParam:TextureFormat=Compressed
 /build:2160p/Equipment_Name.spritefont
 
-#begin 2160p/Inventory_Button_Text.spritefont
+#begin 2160p/Game_Texts.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:2160p/Inventory_Button_Text.spritefont
+/build:2160p/Game_Texts.spritefont
 
 #begin 2160p/Inventory_Item_Menu.spritefont
 /importer:FontDescriptionImporter
@@ -377,6 +440,13 @@
 /processorParam:TextureFormat=Compressed
 /build:2160p/MainMenu_Title.spritefont
 
+#begin 2160p/Messages.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:2160p/Messages.spritefont
+
 #begin 2160p/Options_Category.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -404,6 +474,20 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:2160p/Options_Title.spritefont
+
+#begin 2160p/Pause_Texts.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:2160p/Pause_Texts.spritefont
+
+#begin 2160p/Pause_Title.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:2160p/Pause_Title.spritefont
 
 #begin 2160p/Player_Label.spritefont
 /importer:FontDescriptionImporter
@@ -454,6 +538,13 @@
 /processorParam:TextureFormat=Compressed
 /build:2160p/TutorialSkip_Message.spritefont
 
+#begin 720p/BackButton_Text.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:720p/BackButton_Text.spritefont
+
 #begin 720p/Default.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -482,12 +573,12 @@
 /processorParam:TextureFormat=Compressed
 /build:720p/Equipment_Name.spritefont
 
-#begin 720p/Inventory_Button_Text.spritefont
+#begin 720p/Game_Texts.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:720p/Inventory_Button_Text.spritefont
+/build:720p/Game_Texts.spritefont
 
 #begin 720p/Inventory_Item_Menu.spritefont
 /importer:FontDescriptionImporter
@@ -524,6 +615,13 @@
 /processorParam:TextureFormat=Compressed
 /build:720p/MainMenu_Title.spritefont
 
+#begin 720p/Messages.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:720p/Messages.spritefont
+
 #begin 720p/Options_Category.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -551,6 +649,20 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:720p/Options_Title.spritefont
+
+#begin 720p/Pause_Texts.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:720p/Pause_Texts.spritefont
+
+#begin 720p/Pause_Title.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:720p/Pause_Title.spritefont
 
 #begin 720p/Player_Label.spritefont
 /importer:FontDescriptionImporter
@@ -601,6 +713,13 @@
 /processorParam:TextureFormat=Compressed
 /build:720p/TutorialSkip_Message.spritefont
 
+#begin 900p/BackButton_Text.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:900p/BackButton_Text.spritefont
+
 #begin 900p/Default.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -629,12 +748,12 @@
 /processorParam:TextureFormat=Compressed
 /build:900p/Equipment_Name.spritefont
 
-#begin 900p/Inventory_Button_Text.spritefont
+#begin 900p/Game_Texts.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:900p/Inventory_Button_Text.spritefont
+/build:900p/Game_Texts.spritefont
 
 #begin 900p/Inventory_Item_Menu.spritefont
 /importer:FontDescriptionImporter
@@ -671,6 +790,13 @@
 /processorParam:TextureFormat=Compressed
 /build:900p/MainMenu_Title.spritefont
 
+#begin 900p/Messages.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:900p/Messages.spritefont
+
 #begin 900p/Options_Category.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -698,6 +824,20 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:900p/Options_Title.spritefont
+
+#begin 900p/Pause_Texts.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:900p/Pause_Texts.spritefont
+
+#begin 900p/Pause_Title.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:900p/Pause_Title.spritefont
 
 #begin 900p/Player_Label.spritefont
 /importer:FontDescriptionImporter

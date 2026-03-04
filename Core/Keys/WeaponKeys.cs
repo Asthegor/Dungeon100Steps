@@ -39,7 +39,7 @@ namespace Dungeon100Steps.Core.Keys
         public static readonly Key<ResourceTag> Common_ThrowingHatchet = Key<ResourceTag>.FromString("Weapons/Common/ThrowingHatchet");
         public static readonly Key<ResourceTag> Common_WoodmanAxe = Key<ResourceTag>.FromString("Weapons/Common/WoodmanAxe");
         public static readonly Key<ResourceTag> Common_WornBastardSword = Key<ResourceTag>.FromString("Weapons/Common/WornBastardSword");
-        public static readonly Key<ResourceTag> Common_YewShortbow = Key<ResourceTag>.FromString("Weapons/Common/YewShortbow");
+        public static readonly Key<ResourceTag> Common_YewShortbow = Key<ResourceTag>.FromString("Weapons/Common/YewShortBow");
 
         // UNCOMMON
         public static readonly Key<ResourceTag> Uncommon_CompositeBow = Key<ResourceTag>.FromString("Weapons/Uncommon/CompositeBow");

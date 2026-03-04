@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Dungeon100Steps.Core.Datas
+﻿namespace Dungeon100Steps.Core.Datas
 {
     public class Progression
     {

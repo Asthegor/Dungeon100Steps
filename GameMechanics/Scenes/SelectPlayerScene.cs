@@ -28,7 +28,7 @@ namespace Dungeon100Steps.GameMechanics.Scenes
 
         private readonly Vector2 BUTTONS_DIMENSIONS = new Vector2(150, 50);
 
-        private FontManager _fontManager = ServiceLocator.Get<FontManager>(ServiceKeys.FontManager);
+        private readonly FontManager _fontManager = ServiceLocator.Get<FontManager>(ServiceKeys.FontManager);
         private readonly ResourceManager _resourceManager = ServiceLocator.Get<ResourceManager>(ProjectServiceKeys.AssetsResourceManager);
 
         private readonly Random _random = new Random();
@@ -219,7 +219,7 @@ namespace Dungeon100Steps.GameMechanics.Scenes
                 BorderThickness = UIScaler.Scale(3)
             };
 
-            button.OnClicked += (s, e) => OnHeroSelected(genre, heroClass);
+            button.OnClicked += (s, e) => OnHeroSelected(heroClass);
 
             // Initialiser le dictionnaire de boutons si nécessaire
             _heroButtons ??= new Dictionary<(Genre, HeroClass), Button>();
@@ -237,7 +237,7 @@ namespace Dungeon100Steps.GameMechanics.Scenes
 
             return group;
         }
-        private void OnHeroSelected(Genre genre, HeroClass heroClass)
+        private void OnHeroSelected(HeroClass heroClass)
         {
             _selectedHeroClass = heroClass;
             UpdateHeroSelection();

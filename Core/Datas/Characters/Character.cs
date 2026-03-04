@@ -1,15 +1,19 @@
 ﻿using Dungeon100Steps.Core.Datas.Items;
 
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+
+using System.Timers;
 
 namespace Dungeon100Steps.Core.Datas.Characters
 {
-    public abstract class Character(string name, Texture2D texture, int attack, int defense, int health, int mana)
+    public abstract class Character(string name, Texture2D texture, int attack, int defense, int health, int mana, float combatdelay)
         : IDisposable
     {
         public Texture2D Texture { get; private set; } = texture;
         public string Name { get; private set; } = name;
-
+        public float CombatDelay { get; private set; } = combatdelay;
+        public bool IsReadyToAttack { get; set; }
 
         private Weapon? _weapon;
         private Armor? _armor;
@@ -17,6 +21,7 @@ namespace Dungeon100Steps.Core.Datas.Characters
         private int _maxHealth = health;
         private int _mana = mana;
         private int _maxMana = mana;
+        private float _timer;
 
         #region Vie
         public bool IsDead => Health == 0;
@@ -86,7 +91,20 @@ namespace Dungeon100Steps.Core.Datas.Characters
             }
         }
         public int BaseAttack { get; set; } = attack;
-        public int Attack => BaseAttack + (Weapon?.Bonuses.FirstOrDefault(b => b.Type == BonusType.Attack)!.Amount ?? 0);
+        public int AttackAmount => BaseAttack + (Weapon?.Bonuses.FirstOrDefault(b => b.Type == BonusType.Attack)!.Amount ?? 0);
+
+        public void Update(GameTime gametime)
+        {
+            if (IsReadyToAttack)
+                return;
+
+            _timer += (float)gametime.ElapsedGameTime.TotalSeconds;
+            if (_timer > CombatDelay)
+            {
+                IsReadyToAttack = true;
+                _timer = 0;
+            }
+        }
         #endregion
 
 

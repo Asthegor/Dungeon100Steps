@@ -9,7 +9,7 @@ namespace Dungeon100Steps.Core.Datas.Items
 {
     public static class ArmorFactory
     {
-        private static Random _random = new();
+        private static readonly Random _random = new();
         private static ResourceManager? _resourceManager;
         private static readonly Dictionary<Rarity, List<(int Weight, Armor)>> _allArmors = [];
         private static bool _initialized;
@@ -43,7 +43,8 @@ namespace Dungeon100Steps.Core.Datas.Items
         public static Armor Get(Rarity rarity)
         {
             if (!_initialized)
-                throw new InvalidOperationException("ArmorFactory not initialized");
+                //throw new InvalidOperationException("ArmorFactory not initialized");
+                Initialize();
 
             List<(int Weight, Armor Armor)> armors = _allArmors[rarity];
 
@@ -55,9 +56,9 @@ namespace Dungeon100Steps.Core.Datas.Items
             {
                 cursor += armor.Weight;
                 if (roll < cursor)
-                    return armor.Armor;
+                    return Clone(armor.Armor);
             }
-            return armors.First().Armor;
+            return Clone(armors.First().Armor);
         }
 
 
@@ -198,19 +199,19 @@ namespace Dungeon100Steps.Core.Datas.Items
                 (15, CreateArmor(rarity, ArmorKeys.Rare_DragonScaleShield,
                                  nameof(ArmorKeys.Rare_DragonScaleShield).ToUpperInvariant(),
                              [
-                                new Bonus(BonusType.Attack, "BONUS_ATTACK", 19),
-                                new Bonus(BonusType.Fire, "BONUS_RESISTFIRE", percentage: 8)
+                                new Bonus(BonusType.Attack, "BONUS_DEFENSE", 38),
+                                new Bonus(BonusType.Fire, "BONUS_RESISTFIRE", percentage: 35)
                              ])),
                 (10, CreateArmor(rarity, ArmorKeys.Rare_EnchantedRobe,
                                  nameof(ArmorKeys.Rare_EnchantedRobe).ToUpperInvariant(),
                              [
                                 new Bonus(BonusType.Defense, "BONUS_DEFENSE", 14),
-                                new Bonus(BonusType.Mana, "BONUS_MANA", 5)
+                                new Bonus(BonusType.Mana, "BONUS_MANA", 15)
                              ])),
                 (10, CreateArmor(rarity, ArmorKeys.Rare_MithrilChainmail,
                                  nameof(ArmorKeys.Rare_MithrilChainmail).ToUpperInvariant(),
                              [
-                                new Bonus(BonusType.Attack, "BONUS_ATTACK", 16),
+                                new Bonus(BonusType.Attack, "BONUS_DEFENSE", 29),
                                 new Bonus(BonusType.Ice, "BONUS_ICE", 5)
                              ])),
             ];
@@ -261,6 +262,14 @@ namespace Dungeon100Steps.Core.Datas.Items
         public static void ClearEventSubscribers()
         {
             OnArmorLoaded = null;
+        }
+        private static Armor Clone(Armor original)
+        {
+            var bonusesCopy = original.Bonuses.Select(b => new Bonus(b.Type, b.TranslationKey, b.Amount, b.Percentage, b.Duration)).ToList();
+            return new Armor(original.Name, original.Texture!, bonusesCopy)
+            {
+                Rarity = original.Rarity
+            };
         }
     }
     // Classe EventArgs pour l'événement de progression

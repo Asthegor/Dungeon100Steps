@@ -195,8 +195,8 @@
   <data name="RARE_MITHRILCHAINMAIL" xml:space="preserve">
     <value>Mithril Chainmail</value>
   </data>
-  <data name="RARE_ENCHANTEDROBES" xml:space="preserve">
-    <value>Enchanted Robes</value>
+  <data name="RARE_ENCHANTEDROBE" xml:space="preserve">
+    <value>Enchanted Robe</value>
   </data>
   <data name="RARE_DRAGONSCALESHIELD" xml:space="preserve">
     <value>Dragon Scale Shield</value>

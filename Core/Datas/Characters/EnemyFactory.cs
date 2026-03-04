@@ -66,12 +66,14 @@ namespace Dungeon100Steps.Core.Datas.Characters
 
             // Slime - Boss
             // HP : 20
-            // Attack : 5
+            // AttackAmount : 5
             // Defense : 5
             return GenerateSlime(3, true);
         }
         public static Enemy GenerateBoss(int level, ResourceManager resourceManager)
         {
+            _resourceManager = resourceManager;
+
             // Normalement, les donjons seront organisés par tranche de 10 niveaux.
             int index = level / 10;
             return BOSS_ENEMIES[index](level, true);
@@ -102,7 +104,7 @@ namespace Dungeon100Steps.Core.Datas.Characters
 
             var rndTexture = _random!.Next(0, 2);
             Key<ResourceTag> textureKey = rndTexture == 0 ? EnemyKeys.Rat1 : EnemyKeys.Rat2;
-            return new Enemy("Rat", _resourceManager!.Load<Texture2D>(textureKey)!, attack, defense, health);
+            return new Enemy("Rat", _resourceManager!.Load<Texture2D>(textureKey)!, attack, defense, health, combatdelay: 2f);
         }
 
         private static Enemy GenerateSlime(int level, bool isBoss = false)
@@ -113,7 +115,7 @@ namespace Dungeon100Steps.Core.Datas.Characters
 
             var rndTexture = _random!.Next(0, 2);
             Key<ResourceTag> textureKey = rndTexture == 0 ? EnemyKeys.Slime1 : EnemyKeys.Slime2;
-            return new Enemy("Slime",_resourceManager!.Load<Texture2D>(textureKey)!, attack, defense, health);
+            return new Enemy("Slime",_resourceManager!.Load<Texture2D>(textureKey)!, attack, defense, health, combatdelay: 2.5f);
         }
         #endregion
 

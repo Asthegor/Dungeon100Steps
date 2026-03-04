@@ -10,7 +10,7 @@ using DinaCSharp.Services.Screen;
 
 using Dungeon100Steps.Core.Datas;
 using Dungeon100Steps.Core.Keys;
-using Dungeon100Steps.GameMechanics;
+using Dungeon100Steps.GameMechanics.Scenes;
 using Dungeon100Steps.UI;
 
 using Microsoft.Xna.Framework;
@@ -103,7 +103,7 @@ namespace Dungeon100Steps
         private void InitializeSceneManager()
         {
             _sceneManager = SceneManager.InitializeAndRegister(this);
-            _sceneManager.LoadingScreen<LoadingGameScene>();
+            //_sceneManager.LoadingScreen<LoadingGameScene>();
         }
         private void InitializeFontManager()
         {
@@ -133,12 +133,12 @@ namespace Dungeon100Steps
         private static void InitializeInputManager()
         {
             var playerController = InputManager.RegisterPlayer(PlayerIndex.One,
-                (PlayerInputKeys.Up, new ControllerKey[] { new KeyboardControllerKey(Keys.Up), new GamepadControllerKey(Buttons.DPadUp) }),
-                (PlayerInputKeys.Down, new ControllerKey[] { new KeyboardControllerKey(Keys.Down), new GamepadControllerKey(Buttons.DPadDown) }),
-                (PlayerInputKeys.Left, new ControllerKey[] { new KeyboardControllerKey(Keys.Left), new GamepadControllerKey(Buttons.DPadLeft) }),
-                (PlayerInputKeys.Right, new ControllerKey[] { new KeyboardControllerKey(Keys.Right), new GamepadControllerKey(Buttons.DPadRight) }),
+                (PlayerInputKeys.Up, new ControllerKey[] { new KeyboardControllerKey(Keys.Up), new GamepadControllerKey(Buttons.LeftThumbstickUp) }),
+                (PlayerInputKeys.Down, new ControllerKey[] { new KeyboardControllerKey(Keys.Down), new GamepadControllerKey(Buttons.LeftThumbstickDown) }),
+                (PlayerInputKeys.Left, new ControllerKey[] { new KeyboardControllerKey(Keys.Left), new GamepadControllerKey(Buttons.LeftThumbstickLeft) }),
+                (PlayerInputKeys.Right, new ControllerKey[] { new KeyboardControllerKey(Keys.Right), new GamepadControllerKey(Buttons.LeftThumbstickRight) }),
                 (PlayerInputKeys.Activate, new ControllerKey[] { new KeyboardControllerKey(Keys.Enter), new GamepadControllerKey(Buttons.A) }),
-                (PlayerInputKeys.Cancel, new ControllerKey[] { new KeyboardControllerKey(Keys.Escape), new GamepadControllerKey(Buttons.B) })
+                (PlayerInputKeys.Cancel, new ControllerKey[] { new KeyboardControllerKey(Keys.Back), new GamepadControllerKey(Buttons.B) })
             );
             ServiceLocator.Register(ProjectServiceKeys.PlayerController, playerController);
         }
@@ -162,6 +162,7 @@ namespace Dungeon100Steps
             LocalizationManager.Register(typeof(Core.Resources.Weapons));
             LocalizationManager.Register(typeof(Core.Resources.Armors));
             LocalizationManager.Register(typeof(Core.Resources.Bonus));
+            LocalizationManager.Register(typeof(Core.Resources.Events));
         }
 
         #endregion Enregistrement des services

@@ -61,7 +61,7 @@ namespace Dungeon100Steps.Core.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Attack: {0}.
+        ///   Recherche une chaîne localisée semblable à AttackAmount: {0}.
         /// </summary>
         public static string BONUS_ATTACK {
             get {

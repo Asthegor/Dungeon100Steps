@@ -237,4 +237,28 @@
   <data name="TUTORIALSKIP_MESSAGE" xml:space="preserve">
     <value>Would you like to start the tutorial?</value>
   </data>
+  <data name="INVENTORY_EQUIP" xml:space="preserve">
+    <value>Equip</value>
+  </data>
+  <data name="INVENTORY_DRINK" xml:space="preserve">
+    <value>Drink</value>
+  </data>
+  <data name="INVENTORY_DROP" xml:space="preserve">
+    <value>Drop</value>
+  </data>
+  <data name="LOADING_BAGS" xml:space="preserve">
+    <value>Emptying the bags...</value>
+  </data>
+  <data name="PAUSE_TITLE" xml:space="preserve">
+    <value>Pause</value>
+  </data>
+  <data name="GAME_NEXT_EVENT" xml:space="preserve">
+    <value>Next room</value>
+  </data>
+  <data name="GAME_FIRST_EVENT" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="PRESS_TO_CONTINUE" xml:space="preserve">
+    <value>Press a key/button to continue</value>
+  </data>
 </root>

@@ -7,7 +7,7 @@ namespace Dungeon100Steps.Core.Datas.Items
     public class Bonus(BonusType type, string translationkey = "", int amount = 0, int percentage = 0, int duration = 1)
     {
         public BonusType Type { get; private set; } = type;
-        private string TranslationKey { get; set; } = translationkey;
+        public string TranslationKey { get; private set; } = translationkey;
         public int GetTotalAmount(int? baseValue)
         {
             switch (Type)
@@ -64,6 +64,7 @@ namespace Dungeon100Steps.Core.Datas.Items
                 case BonusType.ResistStunt:
                 case BonusType.ResistIce:
                 case BonusType.ResistBleed:
+                case BonusType.ResistPoison:
                     return string.Format(translation, Percentage);
 
                 default:

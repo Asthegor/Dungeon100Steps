@@ -9,6 +9,7 @@ namespace Dungeon100Steps.Core.Keys
         public static readonly Key<SceneTag> OptionsMenu = Key<SceneTag>.FromString("OptionsMenu");
         public static readonly Key<SceneTag> GameScene = Key<SceneTag>.FromString("GameScene");
 
+
         #region Tutorial Scenes
         public static readonly Key<SceneTag> TutorialSkipScene = Key<SceneTag>.FromString("TutorialSkipScene");
         public static readonly Key<SceneTag> TutorialScene = Key<SceneTag>.FromString("TutorialScene");
@@ -19,7 +20,10 @@ namespace Dungeon100Steps.Core.Keys
         public static readonly Key<SceneTag> SelectPlayerScene = Key<SceneTag>.FromString("SelectPlayerScene");
         public static readonly Key<SceneTag> CityScene = Key<SceneTag>.FromString("CityScene");
         public static readonly Key<SceneTag> InventoryScene = Key<SceneTag>.FromString("InventoryScene");
-        public static readonly Key<SceneTag> DungeonScene = Key<SceneTag>.FromString("DungeonScene");
+
+        public static readonly Key<SceneTag> PauseScene = Key<SceneTag>.FromString("PauseScene");
+        public static readonly Key<SceneTag> DefeatScene = Key<SceneTag>.FromString("DefeatScene");
+        public static readonly Key<SceneTag> VictoryScene = Key<SceneTag>.FromString("VictoryScene");
         #endregion
 
         #region Scenes inside the Dungeon

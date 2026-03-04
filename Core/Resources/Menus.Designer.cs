@@ -61,6 +61,24 @@ namespace Dungeon100Steps.Core.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Start.
+        /// </summary>
+        public static string GAME_FIRST_EVENT {
+            get {
+                return ResourceManager.GetString("GAME_FIRST_EVENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Next room.
+        /// </summary>
+        public static string GAME_NEXT_EVENT {
+            get {
+                return ResourceManager.GetString("GAME_NEXT_EVENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à PROGRESSION.
         /// </summary>
         public static string GAME_PROGRESSION {
@@ -79,11 +97,47 @@ namespace Dungeon100Steps.Core.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Drink.
+        /// </summary>
+        public static string INVENTORY_DRINK {
+            get {
+                return ResourceManager.GetString("INVENTORY_DRINK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Drop.
+        /// </summary>
+        public static string INVENTORY_DROP {
+            get {
+                return ResourceManager.GetString("INVENTORY_DROP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Equip.
+        /// </summary>
+        public static string INVENTORY_EQUIP {
+            get {
+                return ResourceManager.GetString("INVENTORY_EQUIP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Add a touch of sparkle to armors....
         /// </summary>
         public static string LOADING_ARMORS {
             get {
                 return ResourceManager.GetString("LOADING_ARMORS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Emptying the bags....
+        /// </summary>
+        public static string LOADING_BAGS {
+            get {
+                return ResourceManager.GetString("LOADING_BAGS", resourceCulture);
             }
         }
         
@@ -241,7 +295,16 @@ namespace Dungeon100Steps.Core.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Attack:.
+        ///   Recherche une chaîne localisée semblable à Pause.
+        /// </summary>
+        public static string PAUSE_TITLE {
+            get {
+                return ResourceManager.GetString("PAUSE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à AttackAmount:.
         /// </summary>
         public static string PLAYER_ATTACK_LABEL {
             get {
@@ -291,6 +354,15 @@ namespace Dungeon100Steps.Core.Resources {
         public static string PLAYER_MANA_LABEL {
             get {
                 return ResourceManager.GetString("PLAYER_MANA_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Press a key/button to continue.
+        /// </summary>
+        public static string PRESS_TO_CONTINUE {
+            get {
+                return ResourceManager.GetString("PRESS_TO_CONTINUE", resourceCulture);
             }
         }
         
