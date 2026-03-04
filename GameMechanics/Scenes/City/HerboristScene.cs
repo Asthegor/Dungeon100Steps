@@ -28,7 +28,7 @@ namespace Dungeon100Steps.GameMechanics.Scenes.City
         public override void Load()
         {
             var texture = _resourceManager.Load<Texture2D>(BackgroundKeys.Herborist);
-            _background = new Panel(position: Vector2.Zero, dimensions: default, image: texture);
+            _background = new Panel(position: Vector2.Zero, dimensions: ScreenDimensions, image: texture);
 
             _backButton = new Button(position: new Vector2(ScreenDimensions.X * 4 / 5, ScreenDimensions.Y * 7 / 8),
                          dimensions: UIScaler.Scale(BUTTON_NEXT_DIMENSIONS),
